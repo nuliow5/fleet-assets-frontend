@@ -67,9 +67,14 @@ footer {
     position: absolute;
     width: 100%;
     height: 4rem;
-    background-color: #ffffff;
+    background-color: #0a3246;
     margin-top: auto;
     bottom: 0;
+}
+
+footer>p {
+    color: #659dbb;
+    margin: auto;
 }
 
 .content {

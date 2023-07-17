@@ -1,5 +1,11 @@
 const Footer = () => {
-    return <footer>Footer</footer>
+    return (
+        <footer>
+            <p>
+                gerasimovas.lt © 2023
+            </p>
+        </footer>
+    )
 }
 
 export default Footer;

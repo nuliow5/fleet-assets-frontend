@@ -10,7 +10,7 @@ const Menu = () => {
                 <ul>
                     <li>
                         <a href="/trucks">
-                            <i className={"fa fa-home fa-lg"}></i>
+                            <i className={"fa fa-truck fa-lg"}></i>
                             <span className={"nav-text"}>TRUCKS</span>
                         </a>
                     </li>
@@ -18,21 +18,21 @@ const Menu = () => {
 
                     <li className={"darkerlishadow"}>
                         <a href="/assets/sims">
-                            <i className={"fa fa-clock-o fa-lg"}></i>
+                            <i className={"fa fa-mobile fa-lg"}></i>
                             <span className={"nav-text"}>SIMS</span>
                         </a>
                     </li>
 
                     <li className={"darkerli"}>
                         <a href="/assets//tablets">
-                            <i className={"fa fa-desktop fa-lg"}></i>
+                            <i className={"fa fa-tablet fa-lg"}></i>
                             <span className={"nav-text"}>TABLETS</span>
                         </a>
                     </li>
 
                     <li className={"darkerli"}>
                         <a href="/assets/phones">
-                            <i className={"fa fa-plane fa-lg"}></i>
+                            <i className={"fa fa-phone-square fa-lg"}></i>
                             <span className={"nav-text"}>PHONES</span>
                         </a>
                     </li>
