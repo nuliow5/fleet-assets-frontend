@@ -88,17 +88,15 @@ footer {
 
 }
 
-.content_cc{
-
-    margin: 10px;
+.content_cc {
+    width: 80%;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+    /*margin: 10px;*/
 }
 
-.sidebar {
-    display: flex;
-    min-width: 300px;
-    background-color: #136187;
 
-}
 
 .directory {
     border-bottom: 2px solid #136187;
@@ -106,7 +104,7 @@ footer {
 
 }
 
-.main_content{
+.main_content {
     margin-top: 20px;
 }
 

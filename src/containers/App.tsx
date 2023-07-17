@@ -18,7 +18,7 @@ function App() {
                 <Header/>
                 <div className={'content'}>
                     <Menu/>
-                    {/*<Section/>*/}
+
                     <div className={'content_c'}>
                         <div className={'content_cc'}>
 
