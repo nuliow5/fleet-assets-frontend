@@ -25,13 +25,15 @@ function App() {
                             <div className={'directory'}>assets/sim</div>
 
                             <div className={'main_content'}>
-                                <Routes>
-                                    <Route path="/trucks" element={<Trucks/>}/>
-                                    <Route path="/assets/sims" element={<Sims/>}/>
-                                    <Route path="/assets//tablets" element={<Tablets/>}/>
-                                    <Route path="/assets/phones" element={<Phones/>}/>
+                                <div className={'main_content_cc'}>
+                                    <Routes>
+                                        <Route path="/trucks" element={<Trucks/>}/>
+                                        <Route path="/assets/sims" element={<Sims/>}/>
+                                        <Route path="/assets//tablets" element={<Tablets/>}/>
+                                        <Route path="/assets/phones" element={<Phones/>}/>
 
-                                </Routes>
+                                    </Routes>
+                                </div>
                             </div>
                         </div>
                     </div>
