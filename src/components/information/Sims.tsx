@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getAllSims} from "../../api/SimsEndpoints";
+import {getAllTrucks} from "../../api/TrucksEndpoints";
 
 const Sims = () => {
     const [loading, setLoading] = useState(true);
@@ -8,6 +9,7 @@ const Sims = () => {
         [
             {
                 id: "",
+                truckId: "",
                 iccid: "",
                 number: "",
                 pin: "",
@@ -29,6 +31,8 @@ const Sims = () => {
     }, [])
 
 
+
+
     return (
         <>
             <div className={'sub_header'}>
@@ -38,6 +42,7 @@ const Sims = () => {
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Truck</th>
                     <th scope="col">IccId</th>
                     <th scope="col">Number</th>
                     <th scope="col">Operator</th>
@@ -55,32 +60,30 @@ const Sims = () => {
                 {loading ? <div>kraunam</div>
                     : sims
                         .map(sim => {
-                            return (
-                                <tr>
-                                    <td>{sim.id}</td>
-                                    <td>{sim.iccid}</td>
-                                    <td>{sim.number}</td>
-                                    <td>{sim.operator}</td>
-                                    <td>{sim.plan}</td>
-                                    <td>{sim.pin}</td>
-                                    <td>{sim.ip}</td>
-                                    <td>{sim.activate}</td>
-                                    <td>{sim.deActivate}</td>
-                                    <td>edit | delete</td>
-                                </tr>
-                            )
+                                return (
+                                    <tr>
+                                        <td>{sim.id}</td>
+                                        <td>{sim.truckId}</td>
+                                        <td>{sim.iccid}</td>
+                                        <td>{sim.number}</td>
+                                        <td>{sim.operator}</td>
+                                        <td>{sim.plan}</td>
+                                        <td>{sim.pin}</td>
+                                        <td>{sim.ip}</td>
+                                        <td>{sim.activate}</td>
+                                        <td>{sim.deActivate}</td>
+                                        <td>edit | delete</td>
+                                    </tr>
+                                )
 
-                        }
-                )
+                            }
+                        )
                 }
 
                 </tbody>
-
-
             </table>
         </>
     );
-}
-    ;
+};
 
-    export default Sims;
+export default Sims;
