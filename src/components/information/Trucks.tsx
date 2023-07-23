@@ -38,7 +38,6 @@ const Trucks = () => {
                     <th scope="col">Work region</th>
                     <th scope="col">Actions</th>
 
-
                 </tr>
                 </thead>
 
@@ -53,12 +52,9 @@ const Trucks = () => {
                                         <td>{truck.model}</td>
                                         <td>{truck.isWork.toString()}</td>
                                         <td>{truck.workRegion}</td>
-
-
                                         <td>edit | delete</td>
                                     </tr>
                                 )
-
                             }
                         )
                 }

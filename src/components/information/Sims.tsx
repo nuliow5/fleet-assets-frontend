@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getAllSims} from "../../api/SimsEndpoints";
 import {getAllTrucks} from "../../api/TrucksEndpoints";
+import {Link} from "react-router-dom";
 
 const Sims = () => {
     const [loading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ const Sims = () => {
             {
                 id: "",
                 truckId: "",
+                truckLicensePlate: "",
                 iccid: "",
                 number: "",
                 pin: "",
@@ -18,7 +20,6 @@ const Sims = () => {
                 ip: "",
                 activate: "",
                 deActivate: ""
-
             }
         ]
     )
@@ -36,13 +37,14 @@ const Sims = () => {
     return (
         <>
             <div className={'sub_header'}>
-                | + new asset | filter |
+                {/*| + new asset | filter |*/}
+                <Link to={"/assets/sims/add-new-sim"} className={"btn btn-warning"}>Add new sim</Link>
             </div>
             <table className="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Truck</th>
+                    <th scope="col">Owner</th>
                     <th scope="col">IccId</th>
                     <th scope="col">Number</th>
                     <th scope="col">Operator</th>
@@ -63,7 +65,7 @@ const Sims = () => {
                                 return (
                                     <tr>
                                         <td>{sim.id}</td>
-                                        <td>{sim.truckId}</td>
+                                        <td>{sim.truckLicensePlate}</td>
                                         <td>{sim.iccid}</td>
                                         <td>{sim.number}</td>
                                         <td>{sim.operator}</td>
@@ -75,7 +77,6 @@ const Sims = () => {
                                         <td>edit | delete</td>
                                     </tr>
                                 )
-
                             }
                         )
                 }
