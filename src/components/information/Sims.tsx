@@ -38,8 +38,12 @@ const Sims = () => {
         <>
             <div className={'sub_header'}>
                 {/*| + new asset | filter |*/}
-                <Link to={"/assets/sims/add-new-sim"} className={"btn btn-warning"}>Add new sim</Link>
+                <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>Add new sim</Link>
+                <div className={"btn-warning"}>Filter</div>
             </div>
+
+
+
             <table className="table">
                 <thead>
                 <tr>

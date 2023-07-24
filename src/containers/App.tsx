@@ -2,6 +2,7 @@ import Header from "../components/view/Header";
 import Footer from "../components/view/Footer";
 import "../style/style.css";
 import "../style/menu.css";
+import "../style/form.css";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Menu from "../components/view/Menu";
 import Trucks from "../components/information/Trucks";
@@ -33,7 +34,6 @@ function App() {
                                         <Route path="/assets//tablets" element={<Tablets/>}/>
                                         <Route path="/assets/phones" element={<Phones/>}/>
                                         <Route path="/assets/sims/add-new-sim" element={<AddNewSim/>}/>
-
                                     </Routes>
                                 </div>
                             </div>

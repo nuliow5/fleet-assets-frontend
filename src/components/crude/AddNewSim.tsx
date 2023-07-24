@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { useNavigate } from "react-router-dom";
-
+import {useNavigate} from "react-router-dom";
+// import {simImage} from "../../images/sim.png";
 
 const AddNewSim = () => {
     const [formValue, setFormValues] = useState(
@@ -15,7 +15,7 @@ const AddNewSim = () => {
         })
 
     const [message, setMessage] = useState();
-    const navigate= useNavigate();
+    const navigate = useNavigate();
 
     function showInput(event: any) {
         // setFormValues(event.target.value);
@@ -41,110 +41,123 @@ const AddNewSim = () => {
         let res = await fetch('http://localhost:8082/assets/sims',
             {
                 method: "POST",
-                headers:{'content-type' : 'application/json'},
-                body:JSON.stringify(allInputValue)
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(allInputValue)
             });
 
         let resJson = await res.json();
-        if(res.status===200) {
+        if (res.status === 200) {
             setMessage(resJson.success);
             setTimeout(() => {
                 navigate('/assets/sims');
             }, 2000);
 
-            // } else{
-            //     setMessage(resJson.value("Some Error Occured"));
-            // }
         }
+        // else {
+        //     setMessage(resJson.value("Some Error Occured"));
+        // }
+
 
     }
 
     return (
-        <div>
-            add new sim
-            <p className="text-success"> { message } </p>
-            <form onSubmit={handleSubmit}>
+        <div className={'container'}>
+            <div>
+                <p><h2>Add new sim</h2></p>
+                <p className="success_insert"> {message} </p>
+            </div>
+            <div>
+                <form onSubmit={handleSubmit}>
 
-                <div className={'row'}>
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>IccId</label>
-                            <input type={'text'} name={'iccid'} className={'form-control'}
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <input type={'text'} name={'iccid'}
                                    value={formValue.iccid}
                                    onChange={showInput}
+                                   required={true}
                             />
+                            <div className={'underline'}></div>
+                            <label htmlFor={""}>IccId*</label>
                         </div>
-                    </div>
 
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Number</label>
-                            <input type={'text'} name={'number'} className={'form-control'}
+                        <div className={'input-data'}>
+                            <input type={'text'} name={'number'}
                                    value={formValue.number}
-                                   onChange={showInput}/>
+                                   onChange={showInput}
+                                   required={true}/>
+                            <div className={'underline'}></div>
+                            <label htmlFor={""}>Number*</label>
                         </div>
                     </div>
 
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Pin</label>
-                            <input type={'text'} name={'pin'} className={'form-control'}
+                    <div className="form-row">
+                        <div className={'input-data'}>
+                            <input type={'text'} name={'pin'}
                                    value={formValue.pin}
-                                   onChange={showInput}/>
-                        </div>
-                    </div>
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+                            <label htmlFor={""}>Pin</label>
 
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Operator</label>
+                        </div>
+
+                        <div className={'select-data'}>
+                            <label htmlFor={""}>Operator* </label>
                             <select className={''} name={'operator'}
                                     value={formValue.operator}
-                                    onChange={showInput}>
+                                    onChange={showInput}
+                                    required={true}>
                                 <option value={''}>-- Please select --</option>
                                 <option value={'0'}>TELIA</option>
                                 <option value={'1'}>BITE</option>
                                 <option value={'2'}>TELE2</option>
                             </select>
+                            {/*<div className={'underline'}></div>*/}
+
                         </div>
                     </div>
 
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Plan</label>
-                            <input type={'text'} name={'plan'} className={'form-control'}
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <input type={'text'} name={'plan'}
                                    value={formValue.plan}
-                                   onChange={showInput}/>
+                                   onChange={showInput}
+                                   required={true}/>
+                            <div className={'underline'}></div>
+                            <label htmlFor={""}>Plan*</label>
                         </div>
-                    </div>
-
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Ip</label>
-                            <input type={'text'} name={'ip'} className={'form-control'}
+                        <div className={'input-data'}>
+                            <input type={'text'} name={'ip'}
                                    value={formValue.ip}
-                                   onChange={showInput}/>
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+                            <label htmlFor={""}>Ip</label>
                         </div>
                     </div>
-
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}>Activate</label>
-                            <input type={'text'} name={'activate'} className={'form-control'}
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <input type={'date'} name={'activate'}
                                    value={formValue.activate}
-                                   onChange={showInput}/>
-                        </div>
-                    </div>
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+                            <label>Activate</label>
 
-                    <div className={''}>
-                        <div className={''}>
-                            <label className={''}></label>
+                        </div>
+
+                        <div className={'input-data'}>
+
+                            <label htmlFor={""}></label>
                             <button type={'submit'} className={'btn btn-success btn-lg'}>Submit</button>
+
                         </div>
                     </div>
 
-                </div>
 
-            </form>
+                </form>
+            </div>
+
         </div>
     );
 };
