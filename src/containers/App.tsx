@@ -10,6 +10,7 @@ import Sims from "../components/information/Sims";
 import Tablets from "../components/information/Tablets";
 import Phones from "../components/information/Phones";
 import AddNewSim from "../components/crude/AddNewSim";
+import EditSim from "../components/crude/EditSim";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                                         <Route path="/assets//tablets" element={<Tablets/>}/>
                                         <Route path="/assets/phones" element={<Phones/>}/>
                                         <Route path="/assets/sims/add-new-sim" element={<AddNewSim/>}/>
+                                        <Route path="/assets/sims/edit-sim/:id" element={<EditSim/>}/>
                                     </Routes>
                                 </div>
                             </div>

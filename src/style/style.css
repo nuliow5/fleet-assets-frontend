@@ -179,23 +179,54 @@ td {
 
 }
 
-.btn-warning {
-    background-color: #0d4d6b;
-    /*border: 2px solid #0d4d6b;*/
-    color: white;
+.btn-edit {
+    color: #8f8f00;
     cursor: pointer;
-    padding: 9px 15px;
-    min-width: 100px;
-    margin-left: 2px;
-    text-align: center;
+    /*min-width: 40px;*/
+    /*margin-left: 2px;*/
+
     text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+
+
+}
+
+.btn-edit:hover {
+    color: #707004;
+}
+
+.btn-delete {
+    color: #f50808;
+    cursor: pointer;
+    /*padding: 3px 7px;*/
+    /*min-width: 60px;*/
+    /*margin-left: 2px;*/
+
+    text-decoration: none;
+
+
+}
+
+.action-td{
+    width: 120px;
+}
+
+.btn-delete:hover {
+    color: #a90707;
+}
+
+.btn-warning {
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: -5px;
+
 }
 
 .btn-warning:hover {
-    background-color: #11729f;
-    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+    /*background-color: #11729f;*/
+    box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.6);
+    color: #dcd4a7;
+
 }
 
 .row {

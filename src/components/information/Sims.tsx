@@ -32,16 +32,18 @@ const Sims = () => {
     }, [])
 
 
-
-
     return (
         <>
             <div className={'sub_header'}>
                 {/*| + new asset | filter |*/}
-                <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>Add new sim</Link>
-                <div className={"btn-warning"}>Filter</div>
-            </div>
+                <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>
+                    <i className={"fa fa-plus-square"} aria-hidden="true"></i>
+                </Link>
 
+                <div className={"btn-warning"}>
+                    <i className={"fa fa-filter"} aria-hidden="true"></i>
+                </div>
+            </div>
 
 
             <table className="table">
@@ -78,7 +80,14 @@ const Sims = () => {
                                         <td>{sim.ip}</td>
                                         <td>{sim.activate}</td>
                                         <td>{sim.deActivate}</td>
-                                        <td>edit | delete</td>
+                                        <td className={'action-td'}>
+                                            <Link to={'/assets/sims/edit-sim/' + sim.id} className={'btn-edit'}>
+                                                <i className={"fa fa-pencil-square-o"}></i>
+                                            </Link>
+                                            <Link to={''} className={'btn-delete'}>
+                                                <i className={"fa fa-times-circle"}></i>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )
                             }
