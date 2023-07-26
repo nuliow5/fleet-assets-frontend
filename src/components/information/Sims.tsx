@@ -84,7 +84,7 @@ const Sims = () => {
                                             <Link to={'/assets/sims/edit-sim/' + sim.id} className={'btn-edit'}>
                                                 <i className={"fa fa-pencil-square-o"}></i>
                                             </Link>
-                                            <Link to={''} className={'btn-delete'}>
+                                            <Link to={'/assets/sims/delete-sim/' +sim.id} className={'btn-delete'}>
                                                 <i className={"fa fa-times-circle"}></i>
                                             </Link>
                                         </td>
