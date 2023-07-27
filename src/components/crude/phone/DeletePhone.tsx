@@ -1,19 +1,19 @@
 import {useNavigate, useParams} from "react-router-dom";
 
-
-const DeleteSim = () => {
+const DeletePhone = () => {
     const {id} = useParams();
     const navigate = useNavigate();
 
-    fetch(`http://localhost:8082/assets/sims/${id}`, {
+    fetch(`http://localhost:8082/assets/phones/${id}`, {
         method: 'DELETE'
     })
         .then(res => res.json())
         .then(data => console.log(data))
-        .catch(error => console.error(error));
+        .catch(error => console.error(error)
+       );
 
     setTimeout(() => {
-        navigate('/assets/sims');
+        navigate('/assets/phones');
     }, );
 
     return (
@@ -23,4 +23,4 @@ const DeleteSim = () => {
     )
 }
 
-export default DeleteSim;
+export default DeletePhone;

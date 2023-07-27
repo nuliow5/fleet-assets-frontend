@@ -47,15 +47,17 @@ const AddNewSim = () => {
 
         let resJson = await res.json();
         if (res.status === 200) {
-            setMessage(resJson.success);
+            // setMessage(resJson.success);
+            setMessage(resJson.message);
             setTimeout(() => {
                 navigate('/assets/sims');
-            }, 2000);
+            }, 20);
 
         }
-        // else {
-        //     setMessage(resJson.value("Some Error Occured"));
-        // }
+        else {
+            // setMessage(resJson.value("Some Error Occured"));
+            setMessage(resJson.message);
+        }
 
 
     }
@@ -71,37 +73,40 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <input type={'text'} name={'iccid'}
+                            <label htmlFor={""}>IccId*</label>
+                            <input type={'number'} name={'iccid'}
                                    value={formValue.iccid}
                                    onChange={showInput}
                                    required={true}
                             />
                             <div className={'underline'}></div>
-                            <label htmlFor={""}>IccId*</label>
+
                         </div>
 
                         <div className={'input-data'}>
-                            <input type={'text'} name={'number'}
+                            <label htmlFor={""}>Number*</label>
+                            <input type={'number'} name={'number'}
                                    value={formValue.number}
                                    onChange={showInput}
                                    required={true}/>
                             <div className={'underline'}></div>
-                            <label htmlFor={""}>Number*</label>
+
                         </div>
                     </div>
 
                     <div className="form-row">
                         <div className={'input-data'}>
-                            <input type={'text'} name={'pin'}
+                            <label htmlFor={""}>Pin</label>
+                            <input type={'number'} name={'pin'}
                                    value={formValue.pin}
                                    onChange={showInput}
                                    required={false}/>
                             <div className={'underline'}></div>
-                            <label htmlFor={""}>Pin</label>
+
 
                         </div>
 
-                        <div className={'select-data'}>
+                        <div className={'input-data'}>
                             <label htmlFor={""}>Operator* </label>
                             <select className={''} name={'operator'}
                                     value={formValue.operator}
@@ -112,6 +117,7 @@ const AddNewSim = () => {
                                 <option value={'1'}>BITE</option>
                                 <option value={'2'}>TELE2</option>
                             </select>
+
                             {/*<div className={'underline'}></div>*/}
 
                         </div>
@@ -119,37 +125,40 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
+                            <label htmlFor={""}>Plan*</label>
                             <input type={'text'} name={'plan'}
                                    value={formValue.plan}
                                    onChange={showInput}
                                    required={true}/>
                             <div className={'underline'}></div>
-                            <label htmlFor={""}>Plan*</label>
+
                         </div>
                         <div className={'input-data'}>
+                            <label htmlFor={""}>Ip</label>
                             <input type={'text'} name={'ip'}
                                    value={formValue.ip}
                                    onChange={showInput}
                                    required={false}/>
                             <div className={'underline'}></div>
-                            <label htmlFor={""}>Ip</label>
+
                         </div>
                     </div>
                     <div className={'form-row'}>
                         <div className={'input-data'}>
+                            <label>Activate*</label>
                             <input type={'date'} name={'activate'}
                                    value={formValue.activate}
                                    onChange={showInput}
                                    required={false}/>
                             <div className={'underline'}></div>
-                            <label>Activate</label>
+
 
                         </div>
 
                         <div className={'input-data'}>
 
                             <label htmlFor={""}></label>
-                            <button type={'submit'} className={'btn btn-success btn-lg'}>Submit</button>
+                            <button type={'submit'} className={'btn-success'}>Submit</button>
 
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import Phones from "../components/information/Phones";
 import AddNewSim from "../components/crude/sim/AddNewSim";
 import EditSim from "../components/crude/sim/EditSim";
 import DeleteSim from "../components/crude/sim/DeleteSim";
+import DeletePhone from "../components/crude/phone/DeletePhone";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
                     <div className={'content_c'}>
                         <div className={'content_cc'}>
 
-                            <div className={'directory'}>assets/sim</div>
+                            {/*<div className={'directory'}>assets/sim</div>*/}
 
                             <div className={'main_content'}>
                                 <div className={'main_content_cc'}>
@@ -38,6 +39,7 @@ function App() {
                                         <Route path="/assets/sims/add-new-sim" element={<AddNewSim/>}/>
                                         <Route path="/assets/sims/edit-sim/:id" element={<EditSim/>}/>
                                         <Route path="/assets/sims/delete-sim/:id" element={<DeleteSim/>}/>
+                                        <Route path="/assets/phones/delete-phone/:id" element={<DeletePhone/>}/>
                                     </Routes>
                                 </div>
                             </div>

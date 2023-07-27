@@ -13,13 +13,13 @@ const EditSim = () => {
             iccid: '',
             number: '',
             pin: "",
-            // operator: '',
+            operator: '',
             plan: '',
             ip: '',
             activate: ''
         });
 
-    const [message, setMessage]= useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const getSim = async () => {
@@ -42,7 +42,7 @@ const EditSim = () => {
             iccid: editSim.iccid,
             number: editSim.number,
             pin: editSim.pin,
-            // operator: editSim.operator,
+            operator: editSim.operator,
             plan: editSim.plan,
             ip: editSim.ip,
             activate: editSim.activate
@@ -55,116 +55,126 @@ const EditSim = () => {
             body: JSON.stringify(editInputvalue)
         });
 
-        let resjson = await res.json();
+        let resJson = await res.json();
         if (res.status === 200) {
-            setMessage(resjson.success);
+            setMessage(resJson.success);
             setTimeout(() => {
                 navigate('/assets/sims');
-            }, 2000);
+            }, 20);
 
-        }
-        else {
-            setMessage("Some error Occured");
+        } else {
+            setMessage(resJson.message);
         }
 
     }
 
     return (
-        <>
+        <div className={'container'}>
             <div>
-                Edit sim {id}
+                <p><h2>Edit sim [id:{id}] </h2></p>
+                <p className="success_insert"> {message} </p>
+            </div>
+            <div>
+                <form onSubmit={handleUpdate}>
+
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>IccId*</label>
+                            <input type={'number'} name={'iccid'}
+                                   value={editSim.iccid}
+                                   onChange={showInput}
+                                   required={true}
+                            />
+                            <div className={'underline'}></div>
+
+                        </div>
+
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>Number*</label>
+                            <input type={'number'} name={'number'}
+                                   value={editSim.number}
+                                   onChange={showInput}
+                                   required={true}/>
+                            <div className={'underline'}></div>
+
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>Pin</label>
+                            <input type={'number'} name={'pin'}
+                                   value={editSim.pin}
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+
+
+                        </div>
+
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>Operator* </label>
+                            <select className={''} name={'operator'}
+                                    value={editSim.operator}
+                                    onChange={showInput}
+                                    required={true}>
+                                <option value={''}>-- Please select --</option>
+                                <option value={'0'}>TELIA</option>
+                                <option value={'1'}>BITE</option>
+                                <option value={'2'}>TELE2</option>
+                            </select>
+
+                            {/*<div className={'underline'}></div>*/}
+
+                        </div>
+                    </div>
+
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>Plan*</label>
+                            <input type={'text'} name={'plan'}
+                                   value={editSim.plan}
+                                   onChange={showInput}
+                                   required={true}/>
+                            <div className={'underline'}></div>
+
+                        </div>
+                        <div className={'input-data'}>
+                            <label htmlFor={""}>Ip</label>
+                            <input type={'text'} name={'ip'}
+                                   value={editSim.ip}
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+
+                        </div>
+                    </div>
+                    <div className={'form-row'}>
+                        <div className={'input-data'}>
+                            <label>Activate*</label>
+                            <input type={'date'} name={'activate'}
+                                   value={editSim.activate}
+                                   onChange={showInput}
+                                   required={false}/>
+                            <div className={'underline'}></div>
+
+
+                        </div>
+
+                        <div className={'input-data'}>
+
+                            <label htmlFor={""}></label>
+                            <button type={'submit'} className={'btn-success'}>Submit</button>
+
+                        </div>
+                    </div>
+
+
+                </form>
             </div>
 
-            <form onSubmit={handleUpdate}>
+        </div>
 
-                <div className={'form-row'}>
-                    <div className={'input-data1'}>
-                        <input type={'text'} name={'iccid'}
-                               value={editSim.iccid}
-                               onChange={showInput}
-                               required={false}
-                        />
-                        <div className={'underline'}></div>
-                        <label htmlFor={""}>IccId*</label>
-                    </div>
-
-                    <div className={'input-data1'}>
-                        <input type={'text'} name={'number'}
-                               value={editSim.number}
-                               onChange={showInput}
-                               required={false}/>
-                        <div className={'underline'}></div>
-                        <label htmlFor={""}>Number*</label>
-                    </div>
-                </div>
-
-                <div className="form-row">
-                    <div className={'input-data1'}>
-                        <input type={'text'} name={'pin'}
-                               value={editSim.pin}
-                               onChange={showInput}
-                               required={false}/>
-                        <div className={'underline'}></div>
-                        <label htmlFor={""}>Pin</label>
-
-                    </div>
-
-                    {/*<div className={'select-data1'}>*/}
-                    {/*    <label htmlFor={""}>Operator* </label>*/}
-                    {/*    <select className={''} name={'operator'}*/}
-                    {/*            value={editSim.operator}*/}
-                    {/*            onChange={showInput}*/}
-                    {/*            required={true}>*/}
-                    {/*        <option value={''}>-- Please select --</option>*/}
-                    {/*        <option value={'0'}>TELIA</option>*/}
-                    {/*        <option value={'1'}>BITE</option>*/}
-                    {/*        <option value={'2'}>TELE2</option>*/}
-                    {/*    </select>*/}
-                    {/*    /!*<div className={'underline'}></div>*!/*/}
-
-                    {/*</div>*/}
-                </div>
-
-                <div className={'form-row'}>
-                    <div className={'input-data1'}>
-                        <input type={'text'} name={'plan'}
-                               value={editSim.plan}
-                               onChange={showInput}
-                               required={false}/>
-                        <div className={'underline'}></div>
-                        <label htmlFor={""}>Plan*</label>
-                    </div>
-                    <div className={'input-dat1'}>
-                        <input type={'text'} name={'ip'}
-                               value={editSim.ip}
-                               onChange={showInput}
-                               required={false}/>
-                        <div className={'underline'}></div>
-                        <label htmlFor={""}>Ip</label>
-                    </div>
-                </div>
-                <div className={'form-row'}>
-                    <div className={'input-data1'}>
-                        <input type={'date'} name={'activate'}
-                               value={editSim.activate}
-                               onChange={showInput}
-                               required={false}/>
-                        <div className={'underline'}></div>
-                        <label>Activate</label>
-
-                    </div>
-
-                    <div className={'input-data1'}>
-
-                        <label htmlFor={""}></label>
-                        <button type={'submit'} className={'btn btn-success btn-lg'}>Submit</button>
-
-                    </div>
-                </div>
-
-
-            </form>
-        </>
     )
 }
 

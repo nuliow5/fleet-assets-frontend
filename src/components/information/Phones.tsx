@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {getAllSims} from "../../api/SimsEndpoints";
 import {getAllPhones} from "../../api/PhoneEndPoints";
 import {Link} from "react-router-dom";
 
