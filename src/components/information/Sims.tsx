@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {getAllSims} from "../../api/SimsEndpoints";
+import {getAllSims, getBiteSims, getTele2Sims, getTeliaSims} from "../../api/SimsEndpoints";
 import {getAllTrucks} from "../../api/TrucksEndpoints";
 import {Link} from "react-router-dom";
+import {Button, Form, FormControl, InputGroup} from "react-bootstrap";
 
 const Sims = () => {
     const [loading, setLoading] = useState(true);
+
+    const [filterValue, setFilterValue] = useState(0);
+
+    const [search, setSearch] = useState('');
+
+    // const [sortKey, serSortKey] = useState();
+    //
+    // const [sortOrder, serSortOrdet] = useState();
 
     const [sims, setSims] = useState(
         [
@@ -26,23 +35,78 @@ const Sims = () => {
 
 
     useEffect(() => {
-        getAllSims()
-            .then(res => setSims(res.data))
-            .finally(() => setLoading(false))
-    }, [])
+        if (filterValue == 1) {
+            getTeliaSims()
+                .then(res => setSims(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 2) {
+            getBiteSims()
+                .then(res => setSims(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 3) {
+            getTele2Sims()
+                .then(res => setSims(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 0) {
+            getAllSims()
+                .then(res => setSims(res.data))
+                .finally(() => setLoading(false))
+        }
+
+    }, [filterValue])
+
+
+    // fetch("http://localhost:8082/assets/sims?operator=TELIA")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //
+    //     })
 
 
     return (
         <>
             <div className={'sub_header'}>
-                {/*| + new asset | filter |*/}
+
                 <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>
-                    <i className={"fa fa-plus-square"} aria-hidden="true"></i>
+                    {/*<i className={"fa fa-plus-square"} aria-hidden="true"></i>*/}
+                    <p>+ Add new sim</p>
                 </Link>
 
-                <div className={"btn-warning"}>
-                    <i className={"fa fa-filter"} aria-hidden="true"></i>
+                <form className={'search_form'}>
+                    <InputGroup className={'search_bar'}>
+                        <FormControl placeholder={'Search by iccid'}
+                            onChange={(e: any) => setSearch(e.target.value)}
+                        />
+                    </InputGroup>
+                </form>
+
+                <div className={"dropdown"}>
+                    <button className="dropbtn">
+                        {/*<i className={"fa fa-filter"} aria-hidden="true"/>*/}
+                        Filter
+                    </button>
+
+                    <div className="dropdown-content">
+                        <a onClick={() => {
+                            setFilterValue(1)
+                        }}>Telia</a>
+
+                        <a onClick={() => {
+                            setFilterValue(2)
+                        }}>Bite</a>
+
+                        <a onClick={() => {
+                            setFilterValue(3)
+                        }}>Tele2</a>
+
+                        <a onClick={() => {
+                            setFilterValue(0)
+                        }}>Clear filter</a>
+                    </div>
+
                 </div>
+
+
             </div>
 
 
@@ -67,9 +131,11 @@ const Sims = () => {
                 <tbody id="sim-table-body">
                 {loading ? <div>kraunam</div>
                     : sims
-                        .map(sim => {
+                        .filter(sim => {
+                            return search === '' ? sim : sim.iccid.includes(search);
+                        }).map(sim => {
                                 return (
-                                    <tr>
+                                    <tr key={sim.id}>
                                         <td>{sim.id}</td>
                                         <td>{sim.truckLicensePlate}</td>
                                         <td>{sim.iccid}</td>
@@ -84,7 +150,7 @@ const Sims = () => {
                                             <Link to={'/assets/sims/edit-sim/' + sim.id} className={'btn-edit'}>
                                                 <i className={"fa fa-pencil-square-o"}></i>
                                             </Link>
-                                            <Link to={'/assets/sims/delete-sim/' +sim.id} className={'btn-delete'}>
+                                            <Link to={'/assets/sims/delete-sim/' + sim.id} className={'btn-delete'}>
                                                 <i className={"fa fa-times-circle"}></i>
                                             </Link>
                                         </td>
@@ -97,7 +163,8 @@ const Sims = () => {
                 </tbody>
             </table>
         </>
-    );
+    )
+        ;
 };
 
 export default Sims;
