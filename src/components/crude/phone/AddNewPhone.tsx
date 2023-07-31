@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-var simlogo = require("../../../images/icons8-sim-64.png")
+var  phoneLogo = require("../../../images/icons8-phone-80.jpg");
 
-const AddNewSim = () => {
+
+const AddNewPhone = () => {
     const [formValue, setFormValues] = useState(
         {
-            iccid: '',
+            model: '',
+            imei: '',
             number: '',
-            pin: "",
-            operator: '',
-            plan: '',
-            ip: '',
-            activate: ''
+            orderNumber: '',
+            dateOfPurchase: '',
+            chargerType: ''
+            // truckId: '',
+            // truckLicensePlate: ''
         })
 
     const [message, setMessage] = useState();
     const navigate = useNavigate();
 
     function showInput(event: any) {
-        // setFormValues(event.target.value);
         const {name, value} = event.target;
         setFormValues({...formValue, [name]: value})
     }
@@ -27,18 +28,19 @@ const AddNewSim = () => {
         event.preventDefault();
 
         const allInputValue = {
-            iccid: formValue.iccid,
+            model: formValue.model,
+            imei: formValue.imei,
             number: formValue.number,
-            pin: formValue.pin,
-            operator: formValue.operator,
-            plan: formValue.plan,
-            ip: formValue.ip,
-            activate: formValue.activate
+            orderNumber: formValue.orderNumber,
+            dateOfPurchase: formValue.dateOfPurchase,
+            chargerType: formValue.chargerType
+            // truckId: '',
+            // truckLicensePlate: ''
         };
 
         console.log(allInputValue);
 
-        let res = await fetch('http://localhost:8082/assets/sims',
+        let res = await fetch('http://localhost:8082/assets/phones',
             {
                 method: "POST",
                 headers: {'content-type': 'application/json'},
@@ -50,7 +52,7 @@ const AddNewSim = () => {
             // setMessage(resJson.success);
             setMessage(resJson.message);
             setTimeout(() => {
-                navigate('/assets/sims');
+                navigate('/assets/phones');
             }, 20);
 
         }
@@ -62,11 +64,14 @@ const AddNewSim = () => {
 
     }
 
+
+
     return (
         <div className={'container'}>
             <div className={'asset_component'}>
-                <img src={simlogo}/>
-                <p><h2>Add new sim</h2></p>
+
+                <img src={phoneLogo}/>
+                <p><h2>Add new phone</h2></p>
                 <p className="success_insert"> {message} </p>
             </div>
             <div>
@@ -74,20 +79,20 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label htmlFor={""}>IccId*</label>
-                            <input type={'number'} name={'iccid'}
-                                   value={formValue.iccid}
+                            <label htmlFor={""}>Model</label>
+                            <input type={'text'} name={'model'}
+                                   value={formValue.model}
                                    onChange={showInput}
-                                   required={true}
+                                   required={false}
                             />
                             <div className={'underline'}></div>
 
                         </div>
 
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Number*</label>
-                            <input type={'number'} name={'number'}
-                                   value={formValue.number}
+                            <label htmlFor={""}>Imei*</label>
+                            <input type={'number'} name={'imei'}
+                                   value={formValue.imei}
                                    onChange={showInput}
                                    required={true}/>
                             <div className={'underline'}></div>
@@ -97,26 +102,25 @@ const AddNewSim = () => {
 
                     <div className="form-row">
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Pin</label>
-                            <input type={'number'} name={'pin'}
-                                   value={formValue.pin}
+                            <label htmlFor={""}>Number*</label>
+                            <input type={'text'} name={'number'}
+                                   value={formValue.number}
                                    onChange={showInput}
-                                   required={false}/>
+                                   required={true}/>
                             <div className={'underline'}></div>
 
 
                         </div>
 
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Operator* </label>
-                            <select className={''} name={'operator'}
-                                    value={formValue.operator}
+                            <label htmlFor={""}>Charger type* </label>
+                            <select className={''} name={'chargerType'}
+                                    // value={formValue.chargerType}
                                     onChange={showInput}
                                     required={true}>
                                 <option value={''}>-- Please select --</option>
-                                <option value={'0'}>TELIA</option>
-                                <option value={'1'}>BITE</option>
-                                <option value={'2'}>TELE2</option>
+                                <option value={'0'}>C TYPE</option>
+                                <option value={'1'}>MICRO USB</option>
                             </select>
 
                             {/*<div className={'underline'}></div>*/}
@@ -126,31 +130,22 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Plan*</label>
-                            <input type={'text'} name={'plan'}
-                                   value={formValue.plan}
+                            <label htmlFor={""}>Order number*</label>
+                            <input type={'text'} name={'orderNumber'}
+                                   value={formValue.orderNumber}
                                    onChange={showInput}
                                    required={true}/>
-                            <div className={'underline'}></div>
-
-                        </div>
-                        <div className={'input-data'}>
-                            <label htmlFor={""}>Ip</label>
-                            <input type={'text'} name={'ip'}
-                                   value={formValue.ip}
-                                   onChange={showInput}
-                                   required={false}/>
                             <div className={'underline'}></div>
 
                         </div>
                     </div>
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label>Activate*</label>
-                            <input type={'date'} name={'activate'}
-                                   value={formValue.activate}
+                            <label>Date of purchase*</label>
+                            <input type={'date'} name={'dateOfPurchase'}
+                                   value={formValue.dateOfPurchase}
                                    onChange={showInput}
-                                   required={false}/>
+                                   required={true}/>
                             <div className={'underline'}></div>
 
 
@@ -169,7 +164,7 @@ const AddNewSim = () => {
             </div>
 
         </div>
-    );
-};
+    )
+}
 
-export default AddNewSim;
+export default AddNewPhone;

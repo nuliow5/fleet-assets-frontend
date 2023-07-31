@@ -1,44 +1,46 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-var simlogo = require("../../../images/icons8-sim-64.png")
+var tabletLogo = require("../../../images/icons8-tablet-64.png");
+const AddNewTablet = () => {
 
-const AddNewSim = () => {
-    const [formValue, setFormValues] = useState(
+    const [tablet, setTablet] = useState(
         {
-            iccid: '',
-            number: '',
-            pin: "",
-            operator: '',
-            plan: '',
-            ip: '',
-            activate: ''
-        })
+            model: "",
+            imei: "",
+            number: "",
+            orderNumber: "",
+            simNumber: "",
+            // truckLicensePlate: "",
+            dateOfPurchase: "",
+            chargerType: ""
+        }
+    )
 
     const [message, setMessage] = useState();
     const navigate = useNavigate();
 
     function showInput(event: any) {
-        // setFormValues(event.target.value);
         const {name, value} = event.target;
-        setFormValues({...formValue, [name]: value})
+        setTablet({...tablet, [name]: value})
     }
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
         const allInputValue = {
-            iccid: formValue.iccid,
-            number: formValue.number,
-            pin: formValue.pin,
-            operator: formValue.operator,
-            plan: formValue.plan,
-            ip: formValue.ip,
-            activate: formValue.activate
+            model: tablet.model,
+            imei: tablet.imei,
+            number: tablet.number,
+            orderNumber: tablet.orderNumber,
+            simNumber: tablet.simNumber,
+            // truckLicensePlate: "",
+            dateOfPurchase: tablet.dateOfPurchase,
+            chargerType: tablet.chargerType
         };
 
         console.log(allInputValue);
 
-        let res = await fetch('http://localhost:8082/assets/sims',
+        let res = await fetch('http://localhost:8082/assets/tablets',
             {
                 method: "POST",
                 headers: {'content-type': 'application/json'},
@@ -50,11 +52,10 @@ const AddNewSim = () => {
             // setMessage(resJson.success);
             setMessage(resJson.message);
             setTimeout(() => {
-                navigate('/assets/sims');
+                navigate('/assets/tablets');
             }, 20);
 
-        }
-        else {
+        } else {
             // setMessage(resJson.value("Some Error Occured"));
             setMessage(resJson.message);
         }
@@ -65,8 +66,9 @@ const AddNewSim = () => {
     return (
         <div className={'container'}>
             <div className={'asset_component'}>
-                <img src={simlogo}/>
-                <p><h2>Add new sim</h2></p>
+
+                <img src={tabletLogo}/>
+                <p><h2>Add new tablet</h2></p>
                 <p className="success_insert"> {message} </p>
             </div>
             <div>
@@ -74,20 +76,20 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label htmlFor={""}>IccId*</label>
-                            <input type={'number'} name={'iccid'}
-                                   value={formValue.iccid}
+                            <label htmlFor={""}>Model</label>
+                            <input type={'text'} name={'model'}
+                                   value={tablet.model}
                                    onChange={showInput}
-                                   required={true}
+                                   required={false}
                             />
                             <div className={'underline'}></div>
 
                         </div>
 
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Number*</label>
-                            <input type={'number'} name={'number'}
-                                   value={formValue.number}
+                            <label htmlFor={""}>Imei*</label>
+                            <input type={'number'} name={'imei'}
+                                   value={tablet.imei}
                                    onChange={showInput}
                                    required={true}/>
                             <div className={'underline'}></div>
@@ -97,26 +99,25 @@ const AddNewSim = () => {
 
                     <div className="form-row">
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Pin</label>
-                            <input type={'number'} name={'pin'}
-                                   value={formValue.pin}
+                            <label htmlFor={""}>Number*</label>
+                            <input type={'text'} name={'number'}
+                                   value={tablet.number}
                                    onChange={showInput}
-                                   required={false}/>
+                                   required={true}/>
                             <div className={'underline'}></div>
 
 
                         </div>
 
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Operator* </label>
-                            <select className={''} name={'operator'}
-                                    value={formValue.operator}
+                            <label htmlFor={""}>Charger type* </label>
+                            <select className={''} name={'chargerType'}
+                                // value={formValue.chargerType}
                                     onChange={showInput}
                                     required={true}>
                                 <option value={''}>-- Please select --</option>
-                                <option value={'0'}>TELIA</option>
-                                <option value={'1'}>BITE</option>
-                                <option value={'2'}>TELE2</option>
+                                <option value={'0'}>C TYPE</option>
+                                <option value={'1'}>MICRO USB</option>
                             </select>
 
                             {/*<div className={'underline'}></div>*/}
@@ -126,31 +127,30 @@ const AddNewSim = () => {
 
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Plan*</label>
-                            <input type={'text'} name={'plan'}
-                                   value={formValue.plan}
+                            <label htmlFor={""}>Order number*</label>
+                            <input type={'text'} name={'orderNumber'}
+                                   value={tablet.orderNumber}
                                    onChange={showInput}
                                    required={true}/>
                             <div className={'underline'}></div>
-
                         </div>
                         <div className={'input-data'}>
-                            <label htmlFor={""}>Ip</label>
-                            <input type={'text'} name={'ip'}
-                                   value={formValue.ip}
+                            <label htmlFor={""}>Sim</label>
+                            <input type={'number'} name={'simNumber'}
+                                   value={tablet.simNumber}
                                    onChange={showInput}
                                    required={false}/>
                             <div className={'underline'}></div>
-
                         </div>
+
                     </div>
                     <div className={'form-row'}>
                         <div className={'input-data'}>
-                            <label>Activate*</label>
-                            <input type={'date'} name={'activate'}
-                                   value={formValue.activate}
+                            <label>Date of purchase*</label>
+                            <input type={'date'} name={'dateOfPurchase'}
+                                   value={tablet.dateOfPurchase}
                                    onChange={showInput}
-                                   required={false}/>
+                                   required={true}/>
                             <div className={'underline'}></div>
 
 
@@ -169,7 +169,6 @@ const AddNewSim = () => {
             </div>
 
         </div>
-    );
-};
-
-export default AddNewSim;
+    )
+}
+export default AddNewTablet;

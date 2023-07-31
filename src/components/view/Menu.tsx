@@ -24,7 +24,7 @@ const Menu = () => {
                     </li>
 
                     <li className={"darkerli"}>
-                        <a href="/assets//tablets">
+                        <a href="/assets/tablets">
                             <i className={"fa fa-tablet fa-lg"}></i>
                             <span className={"nav-text"}>TABLETS</span>
                         </a>

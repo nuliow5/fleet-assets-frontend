@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getAllSims, getBiteSims, getTele2Sims, getTeliaSims} from "../../api/SimsEndpoints";
-import {getAllTrucks} from "../../api/TrucksEndpoints";
+import {getAllSims, getBiteSims, getTele2Sims, getTeliaSims} from "../../api/endPoints/SimsEndpoints";
 import {Link} from "react-router-dom";
 import {Button, Form, FormControl, InputGroup} from "react-bootstrap";
 
@@ -56,29 +55,23 @@ const Sims = () => {
     }, [filterValue])
 
 
-    // fetch("http://localhost:8082/assets/sims?operator=TELIA")
-    //     .then(res => res.json())
-    //     .then(data => {
-    //
-    //     })
 
 
     return (
         <>
             <div className={'sub_header'}>
-
-                <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>
-                    {/*<i className={"fa fa-plus-square"} aria-hidden="true"></i>*/}
-                    <p>+ Add new sim</p>
-                </Link>
-
                 <form className={'search_form'}>
                     <InputGroup className={'search_bar'}>
                         <FormControl placeholder={'Search by iccid'}
-                            onChange={(e: any) => setSearch(e.target.value)}
+                                     onChange={(e: any) => setSearch(e.target.value)}
                         />
                     </InputGroup>
                 </form>
+
+                <Link to={"/assets/sims/add-new-sim"} className={"btn-warning"}>
+                    {/*<i className={"fa fa-plus-square"} aria-hidden="true"></i>*/}
+                    <p>+ Add sim</p>
+                </Link>
 
                 <div className={"dropdown"}>
                     <button className="dropbtn">
@@ -105,6 +98,8 @@ const Sims = () => {
                     </div>
 
                 </div>
+
+
 
 
             </div>

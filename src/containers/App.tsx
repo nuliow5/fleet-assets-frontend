@@ -13,6 +13,11 @@ import AddNewSim from "../components/crude/sim/AddNewSim";
 import EditSim from "../components/crude/sim/EditSim";
 import DeleteSim from "../components/crude/sim/DeleteSim";
 import DeletePhone from "../components/crude/phone/DeletePhone";
+import AddNewPhone from "../components/crude/phone/AddNewPhone";
+import EditPhone from "../components/crude/phone/EditPhone";
+import AddNewTablet from "../components/crude/tablet/AddNewTablet";
+import DeleteTablet from "../components/crude/tablet/DeleteTablet";
+import EditTablet from "../components/crude/tablet/EditTablet";
 
 
 function App() {
@@ -33,13 +38,23 @@ function App() {
                                 <div className={'main_content_cc'}>
                                     <Routes>
                                         <Route path="/trucks" element={<Trucks/>}/>
+
                                         <Route path="/assets/sims" element={<Sims/>}/>
-                                        <Route path="/assets//tablets" element={<Tablets/>}/>
-                                        <Route path="/assets/phones" element={<Phones/>}/>
                                         <Route path="/assets/sims/add-new-sim" element={<AddNewSim/>}/>
                                         <Route path="/assets/sims/edit-sim/:id" element={<EditSim/>}/>
                                         <Route path="/assets/sims/delete-sim/:id" element={<DeleteSim/>}/>
+
+                                        <Route path="/assets/tablets" element={<Tablets/>}/>
+                                        <Route path="/assets/tablets/add-new-tablet" element={<AddNewTablet/>}/>
+                                        <Route path="/assets/tablets/edit-tablet/:id" element={<EditTablet/>}/>
+                                        <Route path="/assets/tablets/delete-tablet/:id" element={<DeleteTablet/>}/>
+
+                                        <Route path="/assets/phones" element={<Phones/>}/>
+                                        <Route path="/assets/phones/add-new-phone" element={<AddNewPhone/>}/>
+                                        <Route path="/assets/phones/edit-phone/:id" element={<EditPhone/>}/>
                                         <Route path="/assets/phones/delete-phone/:id" element={<DeletePhone/>}/>
+
+
                                     </Routes>
                                 </div>
                             </div>

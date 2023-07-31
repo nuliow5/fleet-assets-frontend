@@ -1,4 +1,4 @@
-import API from "./ApiConfig";
+import API from "../config/ApiConfig";
 
 export const getAllSims = () => API.get('/assets/sims');
 

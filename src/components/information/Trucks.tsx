@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getAllTrucks} from "../../api/TrucksEndpoints";
+import {getAllTrucks} from "../../api/endPoints/TrucksEndpoints";
 
 const Trucks = () => {
     const [loading, setLoading] = useState(true);

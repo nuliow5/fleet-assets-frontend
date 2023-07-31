@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {getAllPhones} from "../../api/PhoneEndPoints";
+import {getAllPhones, getPhoneWithCType, getPhoneWithMicroUsb} from "../../api/endPoints/PhoneEndPoints";
 import {Link} from "react-router-dom";
+import {FormControl, InputGroup} from "react-bootstrap";
+import {getAllSims, getBiteSims, getTele2Sims, getTeliaSims} from "../../api/endPoints/SimsEndpoints";
 
 const Phones = () => {
     const [loading, setLoading] = useState(true);
+
+    const [filterValue, setFilterValue] = useState(0);
+
+    const [search, setSearch] = useState('');
 
     const [phones, setPhones] = useState(
         [
@@ -22,22 +28,67 @@ const Phones = () => {
     )
 
     useEffect(() => {
-        getAllPhones()
-            .then(res => setPhones(res.data))
-            .finally(() => setLoading(false))
-    }, [])
+        if (filterValue == 1) {
+            getPhoneWithMicroUsb()
+                .then(res => setPhones(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 2) {
+            getPhoneWithCType()
+                .then(res => setPhones(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 0) {
+            getAllPhones()
+                .then(res => setPhones(res.data))
+                .finally(() => setLoading(false))
+        }
+
+    }, [filterValue])
+
+
+    // useEffect(() => {
+    //     getAllPhones()
+    //         .then(res => setPhones(res.data))
+    //         .finally(() => setLoading(false))
+    // }, [])
 
     return (
         <>
             <div className={'sub_header'}>
-                {/*| + new asset | filter |*/}
-                <Link to={""} className={"btn-warning"}>
-                    <i className={"fa fa-plus-square"} aria-hidden="true"></i>
+                <form className={'search_form'}>
+                    <InputGroup className={'search_bar'}>
+                        <FormControl placeholder={'Search by imei'}
+                                     onChange={(e: any) => setSearch(e.target.value)}
+                        />
+                    </InputGroup>
+                </form>
+
+                <Link to={"/assets/phones/add-new-phone"} className={"btn-warning"}>
+                    {/*<i className={"fa fa-plus-square"} aria-hidden="true"></i>*/}
+                    <p>+ Add phone</p>
                 </Link>
 
-                <div className={"btn-warning"}>
-                    <i className={"fa fa-filter"} aria-hidden="true"></i>
+                <div className={"dropdown"}>
+                    <button className="dropbtn">
+                        {/*<i className={"fa fa-filter"} aria-hidden="true"/>*/}
+                        Filter
+                    </button>
+
+                    <div className="dropdown-content">
+                        <a onClick={() => {
+                            setFilterValue(1)
+                        }}>MICRO USB</a>
+
+                        <a onClick={() => {
+                            setFilterValue(2)
+                        }}>C TYPE</a>
+
+                        <a onClick={() => {
+                            setFilterValue(0)
+                        }}>Clear filter</a>
+                    </div>
+
                 </div>
+
             </div>
 
             <table className="table">
@@ -59,6 +110,9 @@ const Phones = () => {
                 <tbody id="phone-table-body">
                 {loading ? <div>kraunam</div>
                     : phones
+                        .filter(phone => {
+                            return search === '' ? phone : phone.imei.includes(search);
+                        })
                         .map(phone => {
                                 return (
                                     <tr>

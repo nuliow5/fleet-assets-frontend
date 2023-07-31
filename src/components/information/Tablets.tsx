@@ -1,8 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {getAllTablets} from "../../api/TabletsEndpoints";
+import {getAllTablets, getTabletsWithCType, getTabletsWithMicroUsb} from "../../api/endPoints/TabletsEndpoints";
+import {FormControl, InputGroup} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {getAllPhones, getPhoneWithCType, getPhoneWithMicroUsb} from "../../api/endPoints/PhoneEndPoints";
 
 const Tablets = () => {
     const [loading, setLoading] = useState(true);
+
+    const [filterValue, setFilterValue] = useState(0);
+
+    const [search, setSearch] = useState('');
 
     const [tablets, setTablets] = useState(
         [
@@ -19,20 +26,71 @@ const Tablets = () => {
             }
         ]
     )
+    useEffect(() => {
+        if (filterValue == 1) {
+            getTabletsWithMicroUsb()
+                .then(res => setTablets(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 2) {
+            getTabletsWithCType()
+                .then(res => setTablets(res.data))
+                .finally(() => setLoading(false));
+        } else if (filterValue == 0) {
+            getAllTablets()
+                .then(res => setTablets(res.data))
+                .finally(() => setLoading(false))
+        }
 
-    useEffect( () => {
-        getAllTablets()
-            .then(res => setTablets(res.data))
-            .finally(() => setLoading(false))
-    }, [])
+    }, [filterValue])
+
+    // useEffect( () => {
+    //     getAllTablets()
+    //         .then(res => setTablets(res.data))
+    //         .finally(() => setLoading(false))
+    // }, [])
 
 
 
     return (
         <>
             <div className={'sub_header'}>
-                | + new asset | filter |
+                <form className={'search_form'}>
+                    <InputGroup className={'search_bar'}>
+                        <FormControl placeholder={'Search by imei'}
+                                     onChange={(e: any) => setSearch(e.target.value)}
+                        />
+                    </InputGroup>
+                </form>
+
+                <Link to={"/assets/tablets/add-new-tablet"} className={"btn-warning"}>
+                    <p>+ Add tablet</p>
+                </Link>
+
+                <div className={"dropdown"}>
+                    <button className="dropbtn">
+                        {/*<i className={"fa fa-filter"} aria-hidden="true"/>*/}
+                        Filter
+                    </button>
+
+                    <div className="dropdown-content">
+                        <a onClick={() => {
+                            setFilterValue(1)
+                        }}>MICRO USB</a>
+
+                        <a onClick={() => {
+                            setFilterValue(2)
+                        }}>C TYPE</a>
+
+                        <a onClick={() => {
+                            setFilterValue(0)
+                        }}>Clear filter</a>
+                    </div>
+
+                </div>
             </div>
+
+
+
             <table className="table">
                 <thead>
                 <tr>
@@ -52,6 +110,9 @@ const Tablets = () => {
                 <tbody id="sim-table-body">
                 {loading ? <div>kraunam</div>
                     : tablets
+                        .filter(tablet => {
+                            return search === '' ? tablet : tablet.imei.includes(search);
+                        })
                         .map(tablet => {
                                 return (
                                     <tr>
@@ -64,7 +125,14 @@ const Tablets = () => {
                                         <td>{tablet.truckLicensePlate}</td>
                                         <td>{tablet.dateOfPurchase}</td>
                                         <td>{tablet.chargerType}</td>
-                                        <td>edit | delete</td>
+                                        <td className={'action-td'}>
+                                            <Link to={'/assets/tablets/edit-tablet/' + tablet.id} className={'btn-edit'}>
+                                                <i className={"fa fa-pencil-square-o"}></i>
+                                            </Link>
+                                            <Link to={'/assets/tablets/delete-tablet/' + tablet.id} className={'btn-delete'}>
+                                                <i className={"fa fa-times-circle"}></i>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )
                             }
