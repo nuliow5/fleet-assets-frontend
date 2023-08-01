@@ -18,6 +18,9 @@ import EditPhone from "../components/crude/phone/EditPhone";
 import AddNewTablet from "../components/crude/tablet/AddNewTablet";
 import DeleteTablet from "../components/crude/tablet/DeleteTablet";
 import EditTablet from "../components/crude/tablet/EditTablet";
+import AddNewTruck from "../components/crude/truck/AddNewTruck";
+import DeleteTruck from "../components/crude/truck/DeleteTruck";
+import EditTruck from "../components/crude/truck/EditTruck";
 
 
 function App() {
@@ -38,6 +41,9 @@ function App() {
                                 <div className={'main_content_cc'}>
                                     <Routes>
                                         <Route path="/trucks" element={<Trucks/>}/>
+                                        <Route path="/trucks/add-new-truck" element={<AddNewTruck/>}/>
+                                        <Route path="/trucks/delete-truck/:id" element={<DeleteTruck/>}/>
+                                        <Route path="/trucks/edit-truck/:id" element={<EditTruck/>}/>
 
                                         <Route path="/assets/sims" element={<Sims/>}/>
                                         <Route path="/assets/sims/add-new-sim" element={<AddNewSim/>}/>

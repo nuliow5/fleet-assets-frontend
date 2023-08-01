@@ -14,8 +14,7 @@ const Menu = () => {
                             <span className={"nav-text"}>TRUCKS</span>
                         </a>
                     </li>
-
-
+                    
                     <li className={"darkerlishadow"}>
                         <a href="/assets/sims">
                             <i className={"fa fa-mobile fa-lg"}></i>

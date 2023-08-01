@@ -10,10 +10,6 @@ const Sims = () => {
 
     const [search, setSearch] = useState('');
 
-    // const [sortKey, serSortKey] = useState();
-    //
-    // const [sortOrder, serSortOrdet] = useState();
-
     const [sims, setSims] = useState(
         [
             {
@@ -55,8 +51,6 @@ const Sims = () => {
     }, [filterValue])
 
 
-
-
     return (
         <>
             <div className={'sub_header'}>
@@ -96,12 +90,7 @@ const Sims = () => {
                             setFilterValue(0)
                         }}>Clear filter</a>
                     </div>
-
                 </div>
-
-
-
-
             </div>
 
 
@@ -158,8 +147,7 @@ const Sims = () => {
                 </tbody>
             </table>
         </>
-    )
-        ;
+    );
 };
 
 export default Sims;

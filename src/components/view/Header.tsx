@@ -1,10 +1,10 @@
 import Nav from "./Nav";
-
+var logo = require("../../images/logo-no-background.png");
 const Header = () => {
     return (<header>
         <div className={'logo'}>
-            {/*<img  src={'../src/images/logo-no-background.png'}/>*/}
-            Fleet assets
+            <img  src={logo} className={"webLogo"}/>
+            {/*Fleet assets*/}
         </div>
         <div></div>
 
