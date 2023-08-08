@@ -384,5 +384,9 @@ td {
 /*    border: 1px solid #9d8216;*/
 /*}*/
 
-
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 

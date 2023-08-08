@@ -3,7 +3,7 @@ import Footer from "../components/view/Footer";
 import "../style/style.css";
 import "../style/menu.css";
 import "../style/form.css";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Menu from "../components/view/Menu";
 import Trucks from "../components/information/Trucks";
 import Sims from "../components/information/Sims";
@@ -21,11 +21,20 @@ import EditTablet from "../components/crude/tablet/EditTablet";
 import AddNewTruck from "../components/crude/truck/AddNewTruck";
 import DeleteTruck from "../components/crude/truck/DeleteTruck";
 import EditTruck from "../components/crude/truck/EditTruck";
+import React, {Component, useState} from "react";
+import Login from "../components/login/Login";
 
 
 function App() {
+    // const token = localStorage.getItem('access_token');
+
+    // if(!token) {
+    //     return <Login />
+    // }
+
 
     return (
+
         <BrowserRouter>
             <div id={'page-container'}>
                 <Header/>
@@ -39,7 +48,12 @@ function App() {
 
                             <div className={'main_content'}>
                                 <div className={'main_content_cc'}>
+
+
                                     <Routes>
+                                        <Route path="/auth/authenticate" element={<Login/>}/>
+
+
                                         <Route path="/trucks" element={<Trucks/>}/>
                                         <Route path="/trucks/add-new-truck" element={<AddNewTruck/>}/>
                                         <Route path="/trucks/delete-truck/:id" element={<DeleteTruck/>}/>
@@ -73,6 +87,7 @@ function App() {
         </BrowserRouter>
 
     );
+
 
 }
 
